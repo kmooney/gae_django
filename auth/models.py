@@ -1,5 +1,6 @@
 from webapp2_extras.appengine.auth.models import User as BaseUser
 from google.appengine.ext import ndb
+from django.template.defaultfilters import slugify
 
 class User(BaseUser):
     """
@@ -35,6 +36,7 @@ class User(BaseUser):
                 'first_name': name[0],
                 'last_name': name[1],
                 'location': info.get('location', "Pythonville, USA"),
+                'location_slug': slugify(info.get('location', "Pythonville, USA")),
                 'description': info.get('description', ''),
                 'url': info.get('url'),
                 'picture_url': info.get('picture', ''),
